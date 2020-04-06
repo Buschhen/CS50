@@ -23,6 +23,7 @@ int main(void)
         for(int right = 0; right <1*i;right++){
             printf("#");
         }
-
-    }        printf("\n");
+    printf("\n");
+    }
+    printf("\n");
 }
