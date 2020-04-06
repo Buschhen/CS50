@@ -12,22 +12,31 @@ int main(void)
         //check if number is between 1 and 8
     }
     while (number < 1 || number > 8);
-    for (int i = 0; i < number + 1; i++)
+    for (int i = 1; i <= number ; i++)
     {
-//        int counter = 1
-//        for(int spaceleft = 0; spaceleft > i){
-//            printf(" ")
-//        }
+        //spaces on the left side of the pyramid
+        for (int spaceleft = number - i; spaceleft > 0; spaceleft--)
+        {
+            printf(" ");
+        }
+        //right side of the pyramid
         for (int left = 0; left < 1 * i ; left++)
         {
             printf("#");
         }
-        printf("  ");
+        if (i > 0)
+        {
+            printf("  ");
+        }
+        //left side of pyramid
         for (int right = 0; right < 1 * i ; right++)
         {
             printf("#");
         }
-        printf("\n");
+        if (i > 0)
+        {
+            printf("\n");
+        }
     }
-    printf("\n");
+
 }
