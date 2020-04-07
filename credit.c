@@ -118,7 +118,7 @@ int main (void)
         sum += arrayrest[i];
     }
     //printf("sum = %i\n", sum);
-    if(sum % 10 != 0)
+    if(sum % 10 != 0 || length < 13)
     {
         printf("INVALID\n");
     }
