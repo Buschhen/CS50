@@ -1,10 +1,12 @@
 # include<cs50.h>
 # include<stdio.h>
 
-int main (void)
+int main(void)
 {
+    //Get use imput
     long int prompt = get_long("creditCard = ");
     long int ccn = prompt;
+    //Get length of array1
     int length = 1;
     while (prompt > 0)
     {
@@ -12,6 +14,7 @@ int main (void)
         length++;
         prompt /= 10;
     }
+    //Put string in array
     int lengthindex = length;
     int array1[length - 1];
     int array1index = 0;
@@ -22,35 +25,17 @@ int main (void)
         array1index++;
         ccn /= 10;
     }
-    for (int i = 0; i < length - 1; i++)
-    {
-        //printf("array = %i\n", array1[i]);
-    }
     //Get length of arrays;
     int arrayt2index = 0;
     int arrayrestindex = 0;
-    //while (length - 1 > 0)
-    //{
-    //    if(length % 2 == 0)
-    //    {
-    //        arrayt2index++;
-    //        length--;
-     //   }
-      //  else
-       // {
-         //   arrayrestindex++;
-           // length--;
-       // }
-   // }
 
-
-    for(int i = 0; i < length -1 ;i++)
+    for (int i = 0; i < length - 1 ; i++)
     {
-        if(i == 0)
+        if (i == 0)
         {
             arrayrestindex++;
         }
-        else if(i % 2 == 0)
+        else if (i % 2 == 0)
         {
             arrayrestindex++;
         }
@@ -59,8 +44,7 @@ int main (void)
             arrayt2index++;
         }
     }
-
-    //printf("arrayt2index = %i   arrayrestindex = %i\n",arrayt2index, arrayrestindex);
+    //make 2 Array for further math
     int arrayrest[arrayrestindex];
     int arrayrestcounter = 0;
     int arrayt2[arrayt2index];
@@ -69,11 +53,12 @@ int main (void)
     //Get arrays
     for (int i = 0; i < lengthindex - 1; i++)
     {
-        if (i == 0){
+        if (i == 0)
+        {
             arrayrest[arrayrestcounter] = array1[i];
             arrayrestcounter++;
         }
-        else if(i % 2 == 0)
+        else if (i % 2 == 0)
         {
             arrayrest[arrayrestcounter] = array1[i];
             arrayrestcounter++;
@@ -84,22 +69,16 @@ int main (void)
             arrayt2counter++;
         }
     }
-    for (int i = 0;i < arrayt2index; i++)
+    for (int i = 0; i < arrayt2index; i++)
     {
-        //printf("arrayt2 %i\n",arrayt2[i]);
         arrayt2[i] *= 2;
-        //printf("arrayt2 %i\n",arrayt2[i]);
-    }
-    for (int i = 0;i < arrayrestindex; i++)
-    {
-        //printf("arrayrestindex %i\n", arrayrest[i]);
     }
     //Array loop through arrayt2
     int sum = 0;
     int temp = 0;
     for (int i = 0; i < arrayt2index; i++)
     {
-        if(arrayt2[i] >= 10)
+        if (arrayt2[i] >= 10)
         {
             temp = arrayt2[i] % 10;
             sum += temp;
@@ -111,30 +90,27 @@ int main (void)
             sum += arrayt2[i];
         }
     }
-    //printf("sum = %i\n", sum);
-    for (int i = 0; i < arrayrestindex;i++)
+    //For loop for returning status
+    for (int i = 0; i < arrayrestindex; i++)
     {
-        //printf("arrayrest = %i\n", arrayrest[i]);
-        sum += arrayrest[i];
+        sum += arrayrest[i];    //Summ everything up
     }
-    //printf("sum = %i\n", sum);
-    if(sum % 10 != 0 || length < 13)
+    if (sum % 10 != 0 || length < 13)
     {
         printf("INVALID\n");
     }
     else
     {
-        int Cardhost = (array1[length-2] * 10) + array1[length-3];
-        //printf("Cardhost number is = %i", Cardhost);
-        switch(Cardhost)
+        int Cardhost = (array1[length - 2] * 10) + array1[length - 3]; //First two digets of number passed in by user
+        switch (Cardhost)
         {
-            case 34:
+            case 34:        //Cases for American Express
             case 37:
             {
                 printf("AMEX\n");
                 break;
             }
-            case 51:
+            case 51:        //Cases for Mastercard
             case 52:
             case 53:
             case 54:
@@ -143,7 +119,7 @@ int main (void)
                 printf("MASTERCARD\n");
                 break;
             }
-            case 40:
+            case 40:        //Cases fro Visa
             case 41:
             case 42:
             case 43:
@@ -164,5 +140,4 @@ int main (void)
             }
         }
     }
-    //printf("arrayrestindex = %i\n arayt2index = %i", arrayrestindex,arrayt2index);
 }
