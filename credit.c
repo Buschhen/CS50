@@ -67,6 +67,7 @@ int main (void)
     }
     for (int i = 0;i < arrayt2index; i++)
     {
+        //printf("arrayt2 %i\n",arrayt2[i]);
         arrayt2[i] *= 2;
         //printf("arrayt2 %i\n",arrayt2[i]);
     }
@@ -79,7 +80,7 @@ int main (void)
     int temp = 0;
     for (int i = 0; i < arrayt2index; i++)
     {
-        if(arrayt2[i]>10)
+        if(arrayt2[i] >= 10)
         {
             temp = arrayt2[i] % 10;
             sum += temp;
@@ -91,13 +92,14 @@ int main (void)
             sum += arrayt2[i];
         }
     }
-    //printf("sum = %i", sum);
+    printf("sum = %i", sum);
     for (int i = 0; i < arrayrestindex;i++)
     {
+        printf("arrayrest = %i\n", arrayrest[i]);
         sum += arrayrest[i];
     }
-    //printf("sum = %i\n", sum);
-    if(sum % 10)
+    printf("sum = %i\n", sum);
+    if(sum % 10 == 0)
     {
         printf("INVALID\n");
     }
