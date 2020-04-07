@@ -157,6 +157,11 @@ int main (void)
                 printf("VISA\n");
                 break;
             }
+            default:
+            {
+                printf("INVALID\n");
+                break;
+            }
         }
     }
     //printf("arrayrestindex = %i\n arayt2index = %i", arrayrestindex,arrayt2index);
