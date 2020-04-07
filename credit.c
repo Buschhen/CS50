@@ -14,12 +14,12 @@ int main (void)
     }
     int lengthindex = length;
     int array1[length - 1];
-    int array1index = length - 2;
+    int array1index = 0;
     while (ccn > 0)
     {
         int temp = ccn % 10;
         array1[array1index] = temp;
-        array1index--;
+        array1index++;
         ccn /= 10;
     }
     for (int i = 0; i < length - 1; i++)
@@ -29,19 +29,38 @@ int main (void)
     //Get length of arrays;
     int arrayt2index = 0;
     int arrayrestindex = 0;
-    while (length - 1 > 0)
+    //while (length - 1 > 0)
+    //{
+    //    if(length % 2 == 0)
+    //    {
+    //        arrayt2index++;
+    //        length--;
+     //   }
+      //  else
+       // {
+         //   arrayrestindex++;
+           // length--;
+       // }
+   // }
+
+
+    for(int i = 0; i < length -1 ;i++)
     {
-        if(length % 2 == 0)
+        if(i == 0)
         {
-            arrayt2index++;
-            length--;
+            arrayrestindex++;
+        }
+        else if(i % 2 == 0)
+        {
+            arrayrestindex++;
         }
         else
         {
-            arrayrestindex++;
-            length--;
+            arrayt2index++;
         }
     }
+
+    //printf("arrayt2index = %i   arrayrestindex = %i\n",arrayt2index, arrayrestindex);
     int arrayrest[arrayrestindex];
     int arrayrestcounter = 0;
     int arrayt2[arrayt2index];
@@ -51,10 +70,10 @@ int main (void)
     for (int i = 0; i < lengthindex - 1; i++)
     {
         if (i == 0){
-            arrayt2[arrayt2counter] = array1[i];
-            arrayt2counter++;
+            arrayrest[arrayrestcounter] = array1[i];
+            arrayrestcounter++;
         }
-        else if(i % 2)
+        else if(i % 2 == 0)
         {
             arrayrest[arrayrestcounter] = array1[i];
             arrayrestcounter++;
@@ -92,7 +111,7 @@ int main (void)
             sum += arrayt2[i];
         }
     }
-    //printf("sum = %i", sum);
+    //printf("sum = %i\n", sum);
     for (int i = 0; i < arrayrestindex;i++)
     {
         //printf("arrayrest = %i\n", arrayrest[i]);
@@ -105,7 +124,7 @@ int main (void)
     }
     else
     {
-        int Cardhost = (array1[0] * 10) + array1[1];
+        int Cardhost = (array1[length-2] * 10) + array1[length-3];
         //printf("Cardhost number is = %i", Cardhost);
         switch(Cardhost)
         {
