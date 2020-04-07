@@ -92,13 +92,13 @@ int main (void)
             sum += arrayt2[i];
         }
     }
-    printf("sum = %i", sum);
+    //printf("sum = %i", sum);
     for (int i = 0; i < arrayrestindex;i++)
     {
-        printf("arrayrest = %i\n", arrayrest[i]);
+        //printf("arrayrest = %i\n", arrayrest[i]);
         sum += arrayrest[i];
     }
-    printf("sum = %i\n", sum);
+    //printf("sum = %i\n", sum);
     if(sum % 10 == 0)
     {
         printf("INVALID\n");
