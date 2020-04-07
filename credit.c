@@ -105,8 +105,7 @@ int main (void)
     }
     else
     {
-        int Cardhost = 0;
-        Cardhost = (array1[0] * 10) + array1[1];
+        int Cardhost = (array1[0] * 10) + array1[1];
         //printf("Cardhost number is = %i", Cardhost);
         switch(Cardhost)
         {
