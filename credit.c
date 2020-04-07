@@ -1,78 +1,143 @@
-# include <cs50.h>
-# include <stdio.h>
+# include<cs50.h>
+# include<stdio.h>
 
 int main (void)
 {
-    //Get crad number
-    long int prompt = get_long("credit card number: ");
+    long int prompt = get_long("creditCard = ");
     long int ccn = prompt;
-    //Get arraylength
-    int arraylength = 0;
-    while(prompt > 0)
+    int length = 1;
+    while (prompt > 0)
     {
-        int s = prompt % 10;
-        arraylength ++;
+        int temp = prompt % 10;
+        length++;
         prompt /= 10;
     }
-    //printf("%i",arraylength);
-    //Get in array for better handling
-    int arraycounter = 1;
-    int ccnarray[arraylength + 1];
-    while(ccn > 0)
+    int lengthindex = length;
+    int array1[length - 1];
+    int array1index = length - 2;
+    while (ccn > 0)
     {
-        int res = ccn % 10;
-        ccnarray[arraylength - arraycounter] = res;
+        int temp = ccn % 10;
+        array1[array1index] = temp;
+        array1index--;
         ccn /= 10;
-        arraycounter ++;
     }
-    int resultlength  = 0;
-    arraylength ++;
-    if (arraylength % 2 == 1)
+    for (int i = 0; i < length - 1; i++)
     {
-        resultlength = (arraylength - 1) / 2;
+        //printf("array = %i\n", array1[i]);
     }
-    else
+    //Get length of arrays;
+    int arrayt2index = 0;
+    int arrayrestindex = 0;
+    while (length - 1 > 0)
     {
-        resultlength = arraylength / 2;
-    }
-    //Get array length
-
-    //printf("%i\n",resultlength);
-
-    //Make every second element in array
-    int resultarray[resultlength];
-    int resultarraycounter = 0;
-    for (int i = 0; i < arraylength - 1; i += 2)
-    {
-        resultarray[resultarraycounter] = ccnarray[i] * 2;
-        //printf("ccnarray: %i\n", ccnarray[i]);
-        resultarraycounter ++;
-    }
-    //Summ all together 
-        int sum = 0;
-        int tempres = 0;
-        int tempres2 = 0;
-        for (int i = 0; i < resultlength ; i++)
-    {
-        if(resultarray[i]>10)
+        if(length % 2 == 0)
         {
-            tempres = resultarray[i] % 10;
-            sum += tempres;
-            resultarray[i] /= 10;
-            tempres2 = resultarray[i];
-            sum += tempres2;
+            arrayt2index++;
+            length--;
         }
         else
         {
-            sum += resultarray[i];
+            arrayrestindex++;
+            length--;
         }
-    
     }
-    printf("%i",sum);
+    int arrayrest[arrayrestindex];
+    int arrayrestcounter = 0;
+    int arrayt2[arrayt2index];
+    int arrayt2counter = 0;
 
-
-    for (int i = 0; i < resultlength ; i++)
+    //Get arrays
+    for (int i = 0; i < lengthindex - 1; i++)
     {
-        //printf("%i\n",resultarray[i]);
+        if (i == 0){
+            arrayt2[arrayt2counter] = array1[i];
+            arrayt2counter++;
+        }
+        else if(i % 2)
+        {
+            arrayrest[arrayrestcounter] = array1[i];
+            arrayrestcounter++;
+        }
+        else
+        {
+            arrayt2[arrayt2counter] = array1[i];
+            arrayt2counter++;
+        }
     }
+    for (int i = 0;i < arrayt2index; i++)
+    {
+        arrayt2[i] *= 2;
+        //printf("arrayt2 %i\n",arrayt2[i]);
+    }
+    for (int i = 0;i < arrayrestindex; i++)
+    {
+        //printf("arrayrestindex %i\n", arrayrest[i]);
+    }
+    //Array loop through arrayt2
+    int sum = 0;
+    int temp = 0;
+    for (int i = 0; i < arrayt2index; i++)
+    {
+        if(arrayt2[i]>10)
+        {
+            temp = arrayt2[i] % 10;
+            sum += temp;
+            arrayt2[i] /= 10;
+            sum += arrayt2[i];
+        }
+        else
+        {
+            sum += arrayt2[i];
+        }
+    }
+    //printf("sum = %i", sum);
+    for (int i = 0; i < arrayrestindex;i++)
+    {
+        sum += arrayrest[i];
+    }
+    //printf("sum = %i\n", sum);
+    if(sum % 10)
+    {
+        printf("INVALID\n");
+    }
+    else
+    {
+        int Cardhost = 0;
+        Cardhost = (array1[0] * 10) + array1[1];
+        //printf("Cardhost number is = %i", Cardhost);
+        switch(Cardhost)
+        {
+            case 34:
+            case 37:
+            {
+                printf("AMEX\n");
+                break;
+            }
+            case 51:
+            case 52:
+            case 53:
+            case 54:
+            case 55:
+            {
+                printf("MASTERCARD\n");
+                break;
+            }
+            case 40:
+            case 41:
+            case 42:
+            case 43:
+            case 44:
+            case 45:
+            case 46:
+            case 47:
+            case 48:
+            case 49:
+            {
+                printf("VISA\n");
+                break;
+            }
+        }
+    }
+    //printf("arrayrestindex = %i\n arayt2index = %i", arrayrestindex,arrayt2index);
 }
