@@ -30,7 +30,7 @@ int main(int argc, string argv[])
         // make array with 26 indexs and initialize them with 0
         int checkarray[26] = {0};
         // loop throug array which was command line input
-        for (int i = 0,n = strlen(k); i < n; i++)
+        for (int i = 0, n = strlen(k); i < n; i++)
         {
             // If you can make them to upper or lower case they are a string and you can procede
             if (islower(k[i]) || isupper(k[i]))
@@ -56,7 +56,7 @@ int main(int argc, string argv[])
     //Get string from user
     string t = get_string("plaintext:  ");
     //loop through string
-    for (int i = 0,n = strlen(t); i < n; i++ )
+    for (int i = 0, n = strlen(t); i < n; i++)
     {
         //If its lowercase letter use this method
         if (t[i] > 96 && t[i] < 123)
