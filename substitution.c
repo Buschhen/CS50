@@ -3,10 +3,9 @@
 # include <string.h>
 # include <ctype.h>
 
-int check(string k);
-
-int main(int argc, char* argv[])
+int main(int argc, string argv[])
 {
+    //Get input from user in shorter var
     string k = argv[1];
 
     if (argc == 1)
@@ -50,7 +49,7 @@ int main(int argc, char* argv[])
     {
         if (t[i] > 96 && t[i] < 123)
         {
-            t[i] = tolower(k[tolower(t[i])- 97]);
+            t[i] = tolower(k[tolower(t[i]) - 97]);
         }
         else if (t[i] > 64 && t[i] < 91)
         {
