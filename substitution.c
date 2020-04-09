@@ -57,6 +57,6 @@ int main(int argc, char* argv[])
             t[i] = toupper(k[tolower(t[i]) - 97]);
         }
     }
-    printf("ciphertext:: %s\n", t);
+    printf("ciphertext: %s\n", t);
     return 0;
 }
