@@ -70,7 +70,7 @@ int main(int argc, string argv[])
                 {
                     //compare strings
                     if (strcmp(candidates[n].name, votename) == 0)
-                    //if true end loop and give name vote +1
+                        //if true end loop and give name vote +1
                     {
                         candidates[n].votes++;
                         tillright++;
@@ -97,7 +97,7 @@ bool vote(string name)
     for (int i = 0; i < candidate_count; i++)
     {
         if (strcmp(candidates[i].name, name) == 0)
-        // if true candidate 1+ vote and loopbreaker active
+            // if true candidate 1+ vote and loopbreaker active
         {
             candidates[i].votes++;
             true_counter++;
