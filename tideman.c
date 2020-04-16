@@ -316,7 +316,7 @@ void print_winner(void)
         }
         if (tempc == winnerc)
         {
-            winners++
+            winners++;
         }
     }
     int winnerarray[winners];
@@ -324,7 +324,7 @@ void print_winner(void)
     for (int a = 0; a < candidate_count; a++)
     {
         int tempc = 0;
-        for (int b = 0; u < candidate_count; b++)
+        for (int b = 0; b < candidate_count; b++)
         {
             if (locked[a][b] == 1)
             {
@@ -339,7 +339,7 @@ void print_winner(void)
     }
     for (int m = 0; m < winnerindexc; m++)
     {
-        printf("%s\n"candidates[winnerarray[m]]);
+        printf("%s\n",candidates[winnerarray[m]]);
     }
     return;
 }
