@@ -288,6 +288,7 @@ void print_winner(void)
     // TODO
     int winnerc = 0;
     int winner_index = 0;
+    int winners = 0;
     for (int q = 0; q < candidate_count; q++)
     {
         int tempc = 0;
@@ -301,10 +302,45 @@ void print_winner(void)
         if (tempc > winnerc)
         {
             winnerc = tempc;
-            winner_index = q;
         }
     }
-    printf("%s\n",candidates[winner_index]);
+    for (int p = 0; p < candidate_count; p++)
+    {
+        int tempc = 0;
+        for (int u = 0; u < candidate_count; u++)
+        {
+            if (locked[p][u] == 1)
+            {
+                tempc++;
+            }
+        }
+        if (tempc == winnerc)
+        {
+            winners++
+        }
+    }
+    int winnerarray[winners];
+    int winnerindexc = 0;
+    for (int a = 0; a < candidate_count; a++)
+    {
+        int tempc = 0;
+        for (int b = 0; u < candidate_count; b++)
+        {
+            if (locked[a][b] == 1)
+            {
+                tempc++;
+            }
+        }
+        if (tempc == winnerc)
+        {
+            winnerarray[winnerindexc] = a;
+            winnerindexc++;
+        }
+    }
+    for (int m = 0; m < winnerindexc; m++)
+    {
+        printf("%s\n"candidates[winnerarray[m]]);
+    }
     return;
 }
 
