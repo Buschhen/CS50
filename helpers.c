@@ -49,31 +49,62 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    for (int i = 1; i < height;i += 3)
+    for (int i = 0; i < height;i += 3)
     {
-        for (int j = 1; j < width; j += 3)
+        for (int j = 0; j < width; j += 3)
         {
             int avr_red_r = 0;
             int avr_green_r = 0;
             int avr_blue_r = 0;
-            for (int a = -1; a < 2; a++)
+            switch(j)
             {
-                for (int b = -1; b < 2; b++)
+                case 0:
                 {
-                    avr_red_r += image[i + a][j + b].rgbtRed;
-                    avr_green_r += image[i + a][j + b].rgbtGreen;
-                    avr_blue_r += image[i + a][j + b].rgbtBlue;
+                    for (int a = 0; a < 2; a++)
+                    {
+                        for (int b = 0; b < 2; b++)
+                        {
+                            avr_red_r += image[i + a][j + b].rgbtRed;
+                            avr_green_r += image[i + a][j + b].rgbtGreen;
+                            avr_blue_r += image[i + a][j + b].rgbtBlue;
+                        }
+                    }
+                    for (int a = 0; a < 2; a++)
+                    {
+                        for (int b = 0; b < 2; b++)
+                        {
+                            image[i + a][j + b].rgbtRed = avr_red_r / 9;
+                            image[i + a][j + b].rgbtGreen = avr_green_r / 9;
+                            image[i + a][j + b].rgbtBlue = avr_blue_r / 9;
+                        }
+                    }
+                    break;
+                }
+                default:
+                {
+                    for (int a = -1; a < 2; a++)
+                    {
+                        for (int b = -1; b < 2; b++)
+                        {
+                            avr_red_r += image[i + a][j + b].rgbtRed;
+                            avr_green_r += image[i + a][j + b].rgbtGreen;
+                            avr_blue_r += image[i + a][j + b].rgbtBlue;
+                        }
+                    }
+                    for (int a = -1; a < 2; a++)
+                    {
+                        for (int b = -1; b < 2; b++)
+                        {
+                            image[i + a][j + b].rgbtRed = avr_red_r / 9;
+                            image[i + a][j + b].rgbtGreen = avr_green_r / 9;
+                            image[i + a][j + b].rgbtBlue = avr_blue_r / 9;
+                        }
+                    }
+                    break;
                 }
             }
-            for (int a = -1; a < 2; a++)
-            {
-                for (int b = -1; b < 2; b++)
-                {
-                    image[i + a][j + b].rgbtRed = avr_red_r / 9;
-                    image[i + a][j + b].rgbtGreen = avr_green_r / 9;
-                    image[i + a][j + b].rgbtBlue = avr_blue_r / 9;
-                }
-            }
+
+
         }
     }
     return;
