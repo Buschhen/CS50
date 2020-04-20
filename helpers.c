@@ -56,9 +56,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     //create a temporary table of colors to not alter the calculations
     RGBTRIPLE temp[height][width];
 
-    for (int i = 0; i < height; i++)
+    for (int i = 0; i < width; i++)
     {
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j < height; j++)
         {
             sumBlue = 0;
             sumGreen = 0;
@@ -68,17 +68,17 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // sums values of the pixel and 8 neighboring ones, skips iteration if it goes outside the pic
             for (int k = -1; k < 2; k++)
             {
-                if (i + k < 0 || j + k > height - 1)
-                {
-                    continue;
-                }
+                 if (j + k < 0 || j + k > height - 1)
+                 {
+                     continue;
+                 }
 
                 for (int h = -1; h < 2; h++)
-                {
-                    if (j + h < 0 || i + h > width - 1)
-                    {
-                        continue;
-                    }
+                 {
+                     if (i + h < 0 || i + h > width - 1)
+                     {
+                         continue;
+                     }
 
                     sumBlue += image[j + k][i + h].rgbtBlue;
                     sumGreen += image[j + k][i + h].rgbtGreen;
