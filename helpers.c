@@ -29,7 +29,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
     for (int i = 0; i < height; i++)
     {
-        for ( int j = 0; j < width / 2; j++)
+        for (int j = 0; j < width / 2; j++)
         {
             int Red = image[i][j].rgbtRed;
             int Green = image[i][j].rgbtGreen;
@@ -68,18 +68,17 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // sums values of the pixel and 8 neighboring ones, skips iteration if it goes outside the pic
             for (int k = -1; k < 2; k++)
             {
-                 if (i + k < 0 || i + k > height - 1)
-                 {
-                     continue;
-                 }
+                if (i + k < 0 || i + k > height - 1)
+                {
+                    continue;
+                }
 
                 for (int h = -1; h < 2; h++)
-                 {
-                     if (j + h < 0 || j + h > width - 1)
-                     {
-                         continue;
-                     }
-
+                {
+                    if (j + h < 0 || j + h > width - 1)
+                    {
+                        continue;
+                    }
                     sumBlue += image[i + k][j + h].rgbtBlue;
                     sumGreen += image[i + k][j + h].rgbtGreen;
                     sumRed += image[i + k][j + h].rgbtRed;
@@ -133,80 +132,79 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             // Up
             if (i > 0)
             {
-                rGy += -2 * copy[i-1][j].rgbtRed;
-                gGy += -2 * copy[i-1][j].rgbtGreen;
-                bGy += -2 * copy[i-1][j].rgbtBlue;
+                rGy += -2 * copy[i - 1][j].rgbtRed;
+                gGy += -2 * copy[i - 1][j].rgbtGreen;
+                bGy += -2 * copy[i - 1][j].rgbtBlue;
             }
             // Down
             if (i < height - 1)
             {
 
-                rGy += 2 * copy[i+1][j].rgbtRed;
-                gGy += 2 * copy[i+1][j].rgbtGreen;
-                bGy += 2 * copy[i+1][j].rgbtBlue;
+                rGy += 2 * copy[i + 1][j].rgbtRed;
+                gGy += 2 * copy[i + 1][j].rgbtGreen;
+                bGy += 2 * copy[i + 1][j].rgbtBlue;
             }
             // Left
             if (j > 0)
             {
-                rGx += -2 * copy[i][j-1].rgbtRed;
-                gGx += -2 * copy[i][j-1].rgbtGreen;
-                bGx += -2 * copy[i][j-1].rgbtBlue;
+                rGx += -2 * copy[i][j - 1].rgbtRed;
+                gGx += -2 * copy[i][j - 1].rgbtGreen;
+                bGx += -2 * copy[i][j - 1].rgbtBlue;
 
             }
             // Right
-             if (j < height - 1)
+            if (j < height - 1)
             {
-                rGx += 2 * copy[i][j+1].rgbtRed;
-                gGx += 2 * copy[i][j+1].rgbtGreen;
-                bGx += 2 * copy[i][j+1].rgbtBlue;
+                rGx += 2 * copy[i][j + 1].rgbtRed;
+                gGx += 2 * copy[i][j + 1].rgbtGreen;
+                bGx += 2 * copy[i][j + 1].rgbtBlue;
 
             }
             // Up left
             if (i > 0 && j > 0)
             {
-                // Note: change sign in Gx values here and the result changes side
-                rGx += -1 * copy[i-1][j-1].rgbtRed;
-                gGx += -1 * copy[i-1][j-1].rgbtGreen;
-                bGx += -1 * copy[i-1][j-1].rgbtBlue;
-                rGy += -1 * copy[i-1][j-1].rgbtRed;
-                gGy += -1 * copy[i-1][j-1].rgbtGreen;
-                bGy += -1 * copy[i-1][j-1].rgbtBlue;
+                rGx += -1 * copy[i - 1][j - 1].rgbtRed;
+                gGx += -1 * copy[i - 1][j - 1].rgbtGreen;
+                bGx += -1 * copy[i - 1][j - 1].rgbtBlue;
+                rGy += -1 * copy[i - 1][j - 1].rgbtRed;
+                gGy += -1 * copy[i - 1][j - 1].rgbtGreen;
+                bGy += -1 * copy[i - 1][j - 1].rgbtBlue;
             }
             // Up right
             if (i > 0 && j < width - 1)
             {
-                rGx += 1 * copy[i-1][j+1].rgbtRed;
-                gGx += 1 * copy[i-1][j+1].rgbtGreen;
-                bGx += 1 * copy[i-1][j+1].rgbtBlue;
-                rGy += -1 * copy[i-1][j+1].rgbtRed;
-                gGy += -1 * copy[i-1][j+1].rgbtGreen;
-                bGy += -1 * copy[i-1][j+1].rgbtBlue;
+                rGx += 1 * copy[i - 1][j + 1].rgbtRed;
+                gGx += 1 * copy[i - 1][j + 1].rgbtGreen;
+                bGx += 1 * copy[i - 1][j + 1].rgbtBlue;
+                rGy += -1 * copy[i - 1][j + 1].rgbtRed;
+                gGy += -1 * copy[i - 1][j + 1].rgbtGreen;
+                bGy += -1 * copy[i - 1][j + 1].rgbtBlue;
             }
             // Bottom right
             if (i < height - 1  && j < width - 1)
             {
-                rGx += 1 * copy[i+1][j+1].rgbtRed;
-                gGx += 1 * copy[i+1][j+1].rgbtGreen;
-                bGx += 1 * copy[i+1][j+1].rgbtBlue;
-                rGy += 1 * copy[i+1][j+1].rgbtRed;
-                gGy += 1 * copy[i+1][j+1].rgbtGreen;
-                bGy += 1 * copy[i+1][j+1].rgbtBlue;
+                rGx += 1 * copy[i + 1][j + 1].rgbtRed;
+                gGx += 1 * copy[i + 1][j + 1].rgbtGreen;
+                bGx += 1 * copy[i + 1][j + 1].rgbtBlue;
+                rGy += 1 * copy[i + 1][j + 1].rgbtRed;
+                gGy += 1 * copy[i + 1][j + 1].rgbtGreen;
+                bGy += 1 * copy[i + 1][j + 1].rgbtBlue;
             }
             // Bottom left
             if (i < height - 1  && j > 0)
             {
-                rGx += -1 * copy[i+1][j-1].rgbtRed;
-                gGx += -1 * copy[i+1][j-1].rgbtGreen;
-                bGx += -1 * copy[i+1][j-1].rgbtBlue;
-                rGy += 1 * copy[i+1][j-1].rgbtRed;
-                gGy += 1 * copy[i+1][j-1].rgbtGreen;
-                bGy += 1 * copy[i+1][j-1].rgbtBlue;
+                rGx += -1 * copy[i + 1][j - 1].rgbtRed;
+                gGx += -1 * copy[i + 1][j - 1].rgbtGreen;
+                bGx += -1 * copy[i + 1][j - 1].rgbtBlue;
+                rGy += 1 * copy[i + 1][j - 1].rgbtRed;
+                gGy += 1 * copy[i + 1][j - 1].rgbtGreen;
+                bGy += 1 * copy[i + 1][j - 1].rgbtBlue;
             }
 
             // Compute result
-            image[i][j].rgbtRed = (int) cap255(sqrt((rGx*rGx)+(rGy*rGy)));
-            image[i][j].rgbtGreen = (int) cap255(sqrt((gGx*gGx)+(gGy*gGy)));
-            image[i][j].rgbtBlue = (int) cap255(sqrt((bGx*bGx)+(bGy*bGy)));
+            image[i][j].rgbtRed = (int) cap255(sqrt((rGx * rGx) + (rGy * rGy)));
+            image[i][j].rgbtGreen = (int) cap255(sqrt((gGx * gGx) + (gGy * gGy)));
+            image[i][j].rgbtBlue = (int) cap255(sqrt((bGx * bGx) + (bGy * bGy)));
         }
     }
     return;
@@ -221,7 +219,7 @@ int cap255(double n)
     {
         result = 255;
     }
-    else if(n < 0)
+    else if (n < 0)
     {
         result = 0;
     }
