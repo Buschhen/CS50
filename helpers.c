@@ -47,129 +47,188 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 }
 
 // Blur image
+// void blur(int height, int width, RGBTRIPLE image[height][width])
+// {
+//     for (int i = 0; i < height ;i ++)
+//     {
+//         for (int j = 0; j < width ; j ++)
+//         {
+
+//             float avr_red_r = 0;
+//             float avr_green_r = 0;
+//             float avr_blue_r = 0;
+//             if (i > 0 && j > 0)
+//             {
+//                 for (int a = -1; a < 2; a++)
+//                 {
+//                     for (int b = -1; b < 2; b++)
+//                     {
+//                         avr_red_r += image[i + a][j + b].rgbtRed;
+//                         avr_green_r += image[i + a][j + b].rgbtGreen;
+//                         avr_blue_r += image[i + a][j + b].rgbtBlue;
+//                     }
+//                 }
+//                 avr_red_r /= 9;
+//                 avr_green_r /= 9;
+//                 avr_blue_r /= 9;
+//                 int red = round(avr_red_r);
+//                 int green = round(avr_green_r);
+//                 int blue = round(avr_blue_r);
+//                 for (int a = -1; a < 2; a++)
+//                 {
+//                     for (int b = -1; b < 2; b++)
+//                     {
+//                         image[i + a][j + b].rgbtRed = red;
+//                         image[i + a][j + b].rgbtGreen = green;
+//                         image[i + a][j + b].rgbtBlue = blue;
+//                     }
+//                 }
+//             }
+//             else if (i == 0 && j == 0)
+//             {
+//                 for (int a = 0; a < 2; a++)
+//                 {
+//                     for (int b = 0; b < 2; b++)
+//                     {
+//                         avr_red_r += image[i + a][j + b].rgbtRed;
+//                         avr_green_r += image[i + a][j + b].rgbtGreen;
+//                         avr_blue_r += image[i + a][j + b].rgbtBlue;
+//                     }
+//                 }
+//                 avr_red_r /= 4;
+//                 avr_green_r /= 4;
+//                 avr_blue_r /= 4;
+//                 int red = round(avr_red_r);
+//                 int green = round(avr_green_r);
+//                 int blue = round(avr_blue_r);
+//                 for (int a = 0; a < 2; a++)
+//                 {
+//                     for (int b = 0; b < 2; b++)
+//                     {
+//                         image[i + a][j + b].rgbtRed = red;
+//                         image[i + a][j + b].rgbtGreen = green;
+//                         image[i + a][j + b].rgbtBlue = blue;
+//                     }
+//                 }
+//             }
+//             else if (i == 0 && j == height)
+//             {
+//                 for (int a = 0; a < 1; a++)
+//                 {
+//                     for (int b = -1; b < 1; b++)
+//                     {
+//                         avr_red_r += image[i + a][j + b].rgbtRed;
+//                         avr_green_r += image[i + a][j + b].rgbtGreen;
+//                         avr_blue_r += image[i + a][j + b].rgbtBlue;
+//                     }
+//                 }
+//                 avr_red_r /= 4;
+//                 avr_green_r /= 4;
+//                 avr_blue_r /= 4;
+//                 int red = round(avr_red_r);
+//                 int green = round(avr_green_r);
+//                 int blue = round(avr_blue_r);
+//                 for (int a = 0; a < 1; a++)
+//                 {
+//                     for (int b = -1; b < 1; b++)
+//                     {
+//                         image[i + a][j + b].rgbtRed = red;
+//                         image[i + a][j + b].rgbtGreen = green;
+//                         image[i + a][j + b].rgbtBlue = blue;
+//                     }
+//                 }
+//             }
+//             else if (i == 0)
+//             {
+//                  for (int a = 0; a < 2; a++)
+//                 {
+//                     for (int b = -1; b < 2; b++)
+//                     {
+//                         avr_red_r += image[i + a][j + b].rgbtRed;
+//                         avr_green_r += image[i + a][j + b].rgbtGreen;
+//                         avr_blue_r += image[i + a][j + b].rgbtBlue;
+//                     }
+//                 }
+//                 avr_red_r /= 6;
+//                 avr_green_r /= 6;
+//                 avr_blue_r /= 6;
+//                 int red = round(avr_red_r);
+//                 int green = round(avr_green_r);
+//                 int blue = round(avr_blue_r);
+//                 for (int a = 0; a < 2; a++)
+//                 {
+//                     for (int b = -1; b < 0; b++)
+//                     {
+//                         image[i + a][j + b].rgbtRed = red;
+//                         image[i + a][j + b].rgbtGreen = green;
+//                         image[i + a][j + b].rgbtBlue = blue;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+
+
+//     return;
+// }
+// Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    for (int i = 0; i < height ;i ++)
-    {
-        for (int j = 0; j < width ; j ++)
-        {
+    int sumBlue;
+    int sumGreen;
+    int sumRed;
+    float counter;
+    //create a temporary table of colors to not alter the calculations
+    RGBTRIPLE temp[height][width];
 
-            float avr_red_r = 0;
-            float avr_green_r = 0;
-            float avr_blue_r = 0;
-            if (i > 0 && j > 0)
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            sumBlue = 0;
+            sumGreen = 0;
+            sumRed = 0;
+            counter = 0.00;
+
+            // sums values of the pixel and 8 neighboring ones, skips iteration if it goes outside the pic
+            for (int k = -1; k < 2; k++)
             {
-                for (int a = -1; a < 2; a++)
+                if (j + k < 0 || j + k > height - 1)
                 {
-                    for (int b = -1; b < 2; b++)
-                    {
-                        avr_red_r += image[i + a][j + b].rgbtRed;
-                        avr_green_r += image[i + a][j + b].rgbtGreen;
-                        avr_blue_r += image[i + a][j + b].rgbtBlue;
-                    }
+                    continue;
                 }
-                avr_red_r /= 9;
-                avr_green_r /= 9;
-                avr_blue_r /= 9;
-                int red = round(avr_red_r);
-                int green = round(avr_green_r);
-                int blue = round(avr_blue_r);
-                for (int a = -1; a < 2; a++)
+
+                for (int h = -1; h < 2; h++)
                 {
-                    for (int b = -1; b < 2; b++)
+                    if (i + h < 0 || i + h > width - 1)
                     {
-                        image[i + a][j + b].rgbtRed = red;
-                        image[i + a][j + b].rgbtGreen = green;
-                        image[i + a][j + b].rgbtBlue = blue;
+                        continue;
                     }
+
+                    sumBlue += image[j + k][i + h].rgbtBlue;
+                    sumGreen += image[j + k][i + h].rgbtGreen;
+                    sumRed += image[j + k][i + h].rgbtRed;
+                    counter++;
                 }
             }
-            else if (i == 0 && j == 0)
-            {
-                for (int a = 0; a < 2; a++)
-                {
-                    for (int b = 0; b < 2; b++)
-                    {
-                        avr_red_r += image[i + a][j + b].rgbtRed;
-                        avr_green_r += image[i + a][j + b].rgbtGreen;
-                        avr_blue_r += image[i + a][j + b].rgbtBlue;
-                    }
-                }
-                avr_red_r /= 4;
-                avr_green_r /= 4;
-                avr_blue_r /= 4;
-                int red = round(avr_red_r);
-                int green = round(avr_green_r);
-                int blue = round(avr_blue_r);
-                for (int a = 0; a < 2; a++)
-                {
-                    for (int b = 0; b < 2; b++)
-                    {
-                        image[i + a][j + b].rgbtRed = red;
-                        image[i + a][j + b].rgbtGreen = green;
-                        image[i + a][j + b].rgbtBlue = blue;
-                    }
-                }
-            }
-            else if (i == 0 && j == height)
-            {
-                for (int a = 0; a < 1; a++)
-                {
-                    for (int b = -1; b < 1; b++)
-                    {
-                        avr_red_r += image[i + a][j + b].rgbtRed;
-                        avr_green_r += image[i + a][j + b].rgbtGreen;
-                        avr_blue_r += image[i + a][j + b].rgbtBlue;
-                    }
-                }
-                avr_red_r /= 4;
-                avr_green_r /= 4;
-                avr_blue_r /= 4;
-                int red = round(avr_red_r);
-                int green = round(avr_green_r);
-                int blue = round(avr_blue_r);
-                for (int a = 0; a < 1; a++)
-                {
-                    for (int b = -1; b < 1; b++)
-                    {
-                        image[i + a][j + b].rgbtRed = red;
-                        image[i + a][j + b].rgbtGreen = green;
-                        image[i + a][j + b].rgbtBlue = blue;
-                    }
-                }
-            }
-            else if (i == 0)
-            {
-                 for (int a = 0; a < 2; a++)
-                {
-                    for (int b = -1; b < 2; b++)
-                    {
-                        avr_red_r += image[i + a][j + b].rgbtRed;
-                        avr_green_r += image[i + a][j + b].rgbtGreen;
-                        avr_blue_r += image[i + a][j + b].rgbtBlue;
-                    }
-                }
-                avr_red_r /= 6;
-                avr_green_r /= 6;
-                avr_blue_r /= 6;
-                int red = round(avr_red_r);
-                int green = round(avr_green_r);
-                int blue = round(avr_blue_r);
-                for (int a = 0; a < 2; a++)
-                {
-                    for (int b = -1; b < 0; b++)
-                    {
-                        image[i + a][j + b].rgbtRed = red;
-                        image[i + a][j + b].rgbtGreen = green;
-                        image[i + a][j + b].rgbtBlue = blue;
-                    }
-                }
-            }
+
+            // averages the sum to make picture look blurrier
+            temp[j][i].rgbtBlue = round(sumBlue / counter);
+            temp[j][i].rgbtGreen = round(sumGreen / counter);
+            temp[j][i].rgbtRed = round(sumRed / counter);
         }
     }
 
-
-    return;
+    //copies values from temporary table
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            image[j][i].rgbtBlue = temp[j][i].rgbtBlue;
+            image[j][i].rgbtGreen = temp[j][i].rgbtGreen;
+            image[j][i].rgbtRed = temp[j][i].rgbtRed;
+        }
+    }
 }
 
 // Detect edges
