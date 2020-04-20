@@ -113,7 +113,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
             else if (i == 0 && j == height)
             {
-                for (int a = -1; a < 1; a++)
+                for (int a = 0; a < 1; a++)
                 {
                     for (int b = -1; b < 1; b++)
                     {
@@ -128,7 +128,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 int red = round(avr_red_r);
                 int green = round(avr_green_r);
                 int blue = round(avr_blue_r);
-                for (int a = -1; a < 1; a++)
+                for (int a = 0; a < 1; a++)
                 {
                     for (int b = -1; b < 1; b++)
                     {
